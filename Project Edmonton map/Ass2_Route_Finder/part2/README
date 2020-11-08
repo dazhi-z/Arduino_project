@@ -1,0 +1,84 @@
+# -----------------------------------------
+# Name: Yifan Zhang, Yuxi Chen
+# ID: 1635595, 1649014
+# CMPUT 275, Winter 2020
+# Assignment #2: Driving Route Finder part 2
+# -----------------------------------------
+
+Included Files(client):
+    * client.cpp
+    * consts_and_types.h
+    * draw_route.cpp
+    * draw_route.h
+    * lcd_image.cpp
+    * lcd_image.h
+    * map_drawing.cpp
+    * map_drawing.h
+    * serial_handling.cpp
+    * serial_handling.h
+    * Makefile
+
+Included Files(server) :
+    * digraph.cpp
+    * digraph.h
+    * dijkstra.cpp
+    * dijkstra.h
+    * edmonton-roads-2.0.1.txt
+    * heap.h
+    * serialport.cpp
+    * serialport.h
+    * server.cpp
+    * wdigraph.h
+    * Makefile
+
+Accessories:
+    * Arduino Mega 2560 Board ( AMG )
+    * 1 tft display
+    * 1 SD card
+    * 1 joystick
+    * 1 Breadboard
+    * 2 buttons
+
+Wiring instructions :
+    * VRx <--> A8
+    * VRy <--> A9
+    * SW  <--> Digital Pin 53
+    * GND <--> GND
+    * +5V <--> 5V
+    * Zoom Out Button <--> Digital Pin 47
+    * Zoom In Button  <--> Digital Pin 45
+
+Running Instructions :
+    1. Connect the Arduino to the PC using an A - B style USB cable . Ensure
+that the Arduino is using the proper serial port (/dev/ttyACM0)
+    2. In the directory of ./client , use the command "make upload" to
+upload the code to the Arduino.
+    3. In the directory of ./server, use the command "make" and "./server" to 
+run the program.
+
+Contains added/modified functions(client):
+    * client.cpp:
+        Function main():
+        Reads the three buttons and joystick movement
+            updates the cursor view, map display, and sets the
+            shared.redraw_map flag to 1 if we have to redraw
+        NOTE: this only updates the internal values representing
+            the cursor and map view, the redrawing occurs at the end of this loop
+    
+    * serial_handling.cpp:
+        Function get_waypoints(): Get all waypoints and store them to shared.
+        Function string_to_int32_t(): Convert string message to int32_t type.
+        Function readFromSerial(): Read message from Server
+
+    * draw_route.cpp:
+        Function draw_route(): Draw the lines in terms of
+            the route we obtained.
+
+
+Contains added/modified functions(server):
+
+    * server.cpp
+        Function main(): Listen to requests, get the shortest route and
+            send the route to the client.
+        Function string_to_longlong(): Convert the string type of message
+            to long long and store to point variables.

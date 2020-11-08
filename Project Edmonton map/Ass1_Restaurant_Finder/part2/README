@@ -1,0 +1,106 @@
+# -----------------------------------------
+# Name: Yifan Zhang, Yuxi Chen
+# ID: 1635595, 1649014
+# CMPUT 275, Winter 2020
+# Assignment #1: Restaurant Finder part 2
+# -----------------------------------------
+
+Included Files :
+    * a1part2.cpp
+    * restaurant.cpp
+    * restaurant.h
+    * lcd_image.cpp
+    * lcd_image.h
+    * yegmap.cpp
+    * yegmap.h
+    * README
+    * Makefile
+
+Accessories:
+    * Arduino Mega 2560 Board ( AMG )
+    * 1 tft display
+    * 1 SD card
+    * 1 joystick
+    * 1 Breadboard
+
+Wiring instructions :
+    * Insert the tft display shield with the correct direction
+    * Arduino analog pin A8 should connect to joystick VRy
+    * Arduino analog pin A9 should connect to joystick VRx
+    * Arduino digital pin 53 should connect to joystick pin SW
+    * Arduino +5V should connect to joystick +5V
+    * Arduino GND should connect to joystick GND
+
+Running Instructions :
+    1. Connect the Arduino to the PC using an A - B style USB cable . Ensure
+that the Arduino is using the proper serial port (/ dev / ttyACM0 or - ACM1 )
+    2. In the directory containing the files , use the command "make upload" to
+upload the code to the Arduino.
+
+Makefile Targets :
+    * make upload : Builds the project and upload the code to the Arduino.
+    * make clean : Removes all object files and executable.
+    * make help : Prints a list of targets and the purpose of each.
+
+Note:
+    The files below are the files from e-class:
+        * lcd_image.cpp
+        * lcd_image.h
+        * restaurant.cpp
+        * restaurant.h
+        * yegmap.cpp
+        * yegmap.h
+
+Contains added/modified functions(a1part2.cpp):
+
+    Function beginMode0():(from e-class) Set the mode to 0 and draw the map, cursor and buttons
+        according to curView
+
+    Function beginMode1():(from e-class) Sort the restaurants around the cursor and then display
+        the list, and there are three modes: quickSort, insertionSort and both.
+
+    Function buttonDisplay(): Draw the two buttons and their borders.
+
+    Function starDisplay(): Display the number of stars.
+
+    Function sortDisplay(): Display the sorting mode.
+
+    Function scrollingMap():(from e-class) Process joystick and touchscreen input when in mode 0.
+         The joystick has movement and click operations, and the touchscreen input can be buttons
+         or drawing dots.
+
+    Function scrollingMenu():(from e-class) Process joystick movement when in mode 1.
+        Display the list of restaurants that have the corresponding number of stars by pages.
+        Each page displays 21 restaurants.
+
+    The functions from e-class without change (a1part2.cpp):
+        * setup()
+        * moveCursor()
+        * printRestaurant(int i)
+
+Contains added/modified functions(restaurant.cpp):
+
+    Function insertionSort(RestDist restaurants[], int num):
+        Insertion sort to sort the restaurants.
+        "num" is the number of restaurants to be sorted.
+
+    Function partition(RestDist restaurant[], int begin, int end):
+        When using quick sort, find the pivot and return it.
+
+    Function quickSort(RestDist restaurant[], int begin, int end):
+        Quick sort to sort the restaurants.
+
+    Function getAndInsertSortRestaurants(const MapView &mv, RestDist restaurants[],
+                            Sd2Card *card, RestCache *cache, int star, int &num):
+        Get restaurants that have the corresponding number of stars
+        and use insertion sort to sort the restaurant array by distance.
+
+    Function getAndQuickSortRestaurants(const MapView &mv, RestDist restaurants[],
+                            Sd2Card *card, RestCache *cache, int star, int &num):
+        Get restaurants that have the corresponding number of stars
+        and use insertion sort to sort the restaurant array by distance.
+
+    The functions from e-class without change (restaurant.cpp):
+        * getRestaurant(restaurant *ptr, int i, Sd2Card *card, RestCache *cache)
+        * swap(RestDist &r1, RestDist &r2)
+        * manhattan(int16_t x1, int16_t y1, int16_t x2, int16_t y2)

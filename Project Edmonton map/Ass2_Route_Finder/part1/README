@@ -1,0 +1,54 @@
+# -------------------------------------------
+# Name: Yifan Zhang, Yuxi Chen
+# ID: 1635595, 1649014
+# CMPUT 275, Winter 2020
+# Assignment #2: Driving Route Finder part 1
+# -------------------------------------------
+
+Included Files :
+    * server.cpp
+    * digraph.cpp
+    * dijkstra.cpp
+    * dijkstra.h
+    * digraph.h
+    * wdigraph.h
+    * heap.h
+    * README
+    * edmonton-roads-2.0.1.txt
+    * Makefile
+
+Makefile Targets :
+    * make server : links server.o dijkstra.o digraph.o to create an executable called server.
+    * make server.o : compiles server.cpp to create an object file.
+    * make dijkstra.o : compiles dijkstra.cpp to create an object file.
+    * make digraph.o : compiles digraph.cpp to create an object file.
+    * make clean : deletes all executables and object files.
+
+Running Instructions :
+    1. Use the command "make server" to compile the program and create an executable file.
+    2. Use the command "./server < (input file name) > (output file name)" to run the code.
+        (change the input file name and output file name into the files you need)
+
+
+Notes and Assumptions :
+    There are 6 functions added/modified in the graph_concepts.cpp:
+        * long long manhattan(const Point& pt1, const Point& pt2)
+        * void readGraph(string filename, WDigraph& graph, unordered_map<int, Point>& points)
+        * void input(int& startVertex, int& endVertex, unordered_map<int, Point> points, string filename)
+        * stack<Point> findRoute(int startVertex, int endVertex, unordered_map<int, Point> points, unordered_map<int, PIL> tree)
+        * void output(stack<Point> route, string inputFile, string outputFile)
+
+    The function manhattan(): Return the Manhattan distance between the two given points
+
+    The function readGraph(): Read the map file and build the graph
+
+    The function input(): Get points from the input file, and find the nearest vertices of them
+
+    The function findRoute(): Find the route from start vertex to the end vertex
+
+    The function output(): Print results to the output file based on the input instructions
+
+    There is one function in dijkstra.cpp:
+        * void dijkstra(const WDigraph& graph, int startVertex, unordered_map<int, PIL>& tree):
+            Compute minimum cost paths that start from a given vertex.
+            Use a binary heap to efficiently retrieve the nearest unexplored vertex the start vertex at every iteration

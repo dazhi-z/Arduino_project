@@ -1,0 +1,72 @@
+# -----------------------------------------
+# Name: Yifan Zhang, Yuxi Chen
+# ID: 1635595, 1649014
+# CMPUT 275, Winter 2020
+# Assignment #1: Restaurant Finder part 1
+# -----------------------------------------
+
+Included Files :
+    * a1part1.cpp
+    * lcd_image.cpp
+    * lcd_image.h
+    * README
+    * Makefile
+
+Accessories:
+    * Arduino Mega 2560 Board ( AMG )
+    * 1 tft display
+    * 1 SD card
+    * 1 joystick
+    * 1 Breadboard
+
+Wiring instructions :
+    * Insert the tft display shield with the correct direction
+    * Arduino analog pin A8 should connect to joystick VRy
+    * Arduino analog pin A9 should connect to joystick VRx
+    * Arduino digital pin 53 should connect to joystick pin SW
+    * Arduino +5V should connect to joystick +5V
+    * Arduino GND should connect to joystick GND
+
+Running Instructions :
+    1. Connect the Arduino to the PC using an A - B style USB cable . Ensure
+that the Arduino is using the proper serial port (/ dev / ttyACM0 or - ACM1 )
+    2. In the directory containing the files , use the command "make upload" to
+upload the code to the Arduino.
+
+Makefile Targets :
+    * make upload : Builds the project and upload the code to the Arduino.
+    * make clean : Removes all object files and executable.
+    * make help : Prints a list of targets and the purpose of each.
+
+Contains functions:
+
+    Function main():Call function setup() to initialize the program and continue calling
+        function processJoystick() to fulfill the tasks.
+
+    Function setup():Initialize the program, draw the map and initialize the cursor.
+
+    Function redrawCursor(uint16_t colour): forward declaration for redrawing the cursor
+
+    Function redrawMap(int lastLocationX, int lastLocationY): redraw the small portion of
+        the map around the old cursor position.
+
+    Function getRestaurantFast(int restIndex, restaurant *restPtr): find the restaurant in terms
+        of the index and store it to the pointer *restPtr
+
+    Function get_distance(int x, int y, RestDist *rest_dist): get indices and Manhattan distances
+        of all restaurants store them to a pointer which points to rest_dist
+
+    Function swap(RestDist &a, RestDist &b): swap the two structs
+
+    Function isort(RestDist *rest_dist, int n): sort the struct array by each element's distance
+        using insertion sort and deal with the joy stick movement
+
+    Function displayText(int index, int selectedRest, RestDist *restDist): display the restaurant
+        name highlighted if it is selected
+
+    Function processTouchScreen(int CurrentMapX, int CurrentMapY, RestDist *rest_dist): display
+        a small dot in the location of each restaurant in the current view
+
+    Function processMode(int &CurrentMapX, int &CurrentMapY, bool &isMap, RestDist *rest_dist):
+            running different modes in terms of the joystick the mode changes when the button
+            is pressed
